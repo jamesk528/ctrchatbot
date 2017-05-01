@@ -60,3 +60,8 @@ intents.matches(/^Travel Card/i, [
 
 
 //DvD5Cv4jMys.cwA.cgk.6-Z0LRE6k0DZi3shEp7h3T5t4J4Rg_sXCP5qMAyIkUo
+
+server.get('/', restify.serveStatic({
+ directory: "C:\ctrchatbot",
+ default: '/index.html'
+}));
