@@ -24,27 +24,76 @@ server.post('/api/messages', connector.listen());
 //=========================================================
 // Bots Dialogs
 //=========================================================
-
 var intents = new builder.IntentDialog();
 bot.dialog('/', intents);
 
-intents.matches(/^Purchasing Card/i, [
-    function(session) {
-        builder.Prompts.text(session, "The limit is $1000 per transaction and $5,000 per month. Would you like to request an exemption? ")
-    }, 
-    function(session, results) {
-        session.send("Ok.. %s", results.response);
+intents.onDefault([
+    function (session, args, next) {
+        if (!session.userData.text) {
+            session.beginDialog('/Pcard');
+        } else {
+            next();
+        }
+    },
+    function (session, results) {
+        session.send('Hello, what is your name?', session.userData.text);
     }
 ]);
 
-intents.matches(/^Travel Card/i, [
-    function(session) {
-        builder.Prompts.text(session, "What would you like to know about the travel card?")
-    }, 
-    function(session, results) {
-        session.send("Ok.. %s", results.response);
+bot.dialog('/Pcard', [
+ function (session) {
+        builder.Prompts.text(session, 'Hello, what\'s is your name?');
+    },
+ function (session) {
+        builder.Prompts.text(session, 'Ron?! Like the Ron Galperin??');
+    },
+ function (session) {
+        builder.Prompts.text(session, 'Oh of course! How can I help you?');
+    },
+    function (session) {
+        builder.Prompts.text(session, 'The limit is $1,000 per transaction and $5,000 per month. Would you like to request an exception?');
+    },
+ function (session) {
+        builder.Prompts.text(session, 'Are you really asking me this in front of the Controller?');
+    },
+ function (session) {
+        builder.Prompts.text(session, 'No, you cannot buy alcohol with a purchasing card.');
+    },
+function (session) {
+        builder.Prompts.text(session, 'No, you cannot travel to Arizona with a travel card.');
+    },
+function (session) {
+        builder.Prompts.text(session, 'Is there anything else I can help you with today?');
+    },
+    function (session) {
+        builder.Prompts.text(session, 'You are very welcome.');
+    },
+    function (session, results) {
+        session.userData.text = results.response;
+        session.endDialog();
     }
 ]);
+
+// var intents = new builder.IntentDialog();
+// bot.dialog('/', intents);
+
+// intents.matches(/^Purchasing Card/i, [
+//     function(session) {
+//         builder.Prompts.text(session, "The limit is $1000 per transaction and $5,000 per month. Would you like to request an exemption? ")
+//     }, 
+//     function(session, results) {
+//         session.send("Ok.. %s", results.response);
+//     }
+// ]);
+
+// intents.matches(/^Travel Card/i, [
+//     function(session) {
+//         builder.Prompts.text(session, "What would you like to know about the travel card?")
+//     }, 
+//     function(session, results) {
+//         session.send("Ok.. %s", results.response);
+//     }
+// ]);
 
 // bot.dialog('/', [
 //   function (session) {
