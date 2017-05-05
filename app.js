@@ -45,7 +45,7 @@ bot.dialog('/Pcard', [
         builder.Prompts.text(session, 'Hello, what\'s your name?');
     },
  function (session) {
-        builder.Prompts.text(session, 'Ron?! Like the Ron Galperin??');
+        builder.Prompts.text(session, 'Ron?! Like the Ron Galperin?');
     },
  function (session) {
         builder.Prompts.text(session, 'Oh of course! How can I help you?');
