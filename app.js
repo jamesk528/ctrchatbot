@@ -54,10 +54,10 @@ bot.dialog('/Pcard', [
         builder.Prompts.text(session, 'The limit is $1,000 per transaction and $5,000 per month.');
     },
  function (session) {
-        builder.Prompts.text(session, 'Are you being serious?');
+        builder.Prompts.text(session, 'Are you serious?');
     },
 function (session) {
-        builder.Prompts.text(session, 'No, traveling to Arizona has been suspended due to SB 1070 and HB 2162. Please refer to the travel policy 1.8.7 section F. ');
+        builder.Prompts.text(session, 'No, traveling to Arizona has been suspended due to SB 1070 and HB 2162. Please refer to the travel policy 1.8.7 section F for more information. ');
     },
 function (session) {
         builder.Prompts.text(session, 'Is there anything else I can help you with today?');
