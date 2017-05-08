@@ -33,7 +33,6 @@ intents.onDefault([
         }
     },
     function (session, results) {
-bot.dialog('/Pcard', [
         session.beginDialog('/BotDialog', session.userData.text);
     }
 ]);
