@@ -4,7 +4,6 @@ var http = require('http');
 //=========================================================
 // Bot Setup
 //=========================================================
-
 var dotenv = require('dotenv');
 dotenv.load();
 // Setup Restify Server
@@ -12,7 +11,6 @@ var server = restify.createServer();
 server.listen(process.env.port || process.env.PORT || 3978, function () {
    console.log('%s listening to %s', server.name, server.url);
 });
-
 // Create chat bot
 var connector = new builder.ChatConnector({
     appId: process.env.MICROSOFT_APP_ID,
@@ -20,7 +18,6 @@ var connector = new builder.ChatConnector({
 });
 var bot = new builder.UniversalBot(connector);
 server.post('/api/messages', connector.listen());
-
 //=========================================================
 // Bots Dialogs
 //=========================================================
@@ -30,17 +27,17 @@ bot.dialog('/', intents);
 intents.onDefault([
     function (session, args, next) {
         if (!session.userData.text) {
-            session.beginDialog('/Pcard');
+            session.beginDialog('/BotDialog');
         } else {
             next();
         }
     },
     function (session, results) {
-        session.send('Hello, what is your name?', session.userData.text);
+bot.dialog('/Pcard', [
+        session.beginDialog('/BotDialog', session.userData.text);
     }
 ]);
-
-bot.dialog('/Pcard', [
+bot.dialog('/BotDialog', [
  function (session) {
         builder.Prompts.text(session, 'Hello, what\'s your name?');
     },
@@ -57,13 +54,13 @@ bot.dialog('/Pcard', [
         builder.Prompts.text(session, 'Are you serious?');
     },
 function (session) {
-        builder.Prompts.text(session, 'No, traveling to Arizona has been suspended due to SB 1070 and HB 2162. Please refer to the travel policy 1.8.7 section F for more information. ');
+        builder.Prompts.text(session, 'No, traveling to Arizona has been suspended due to SB 1070 and HB 2162. Please refer to the travel policy 1.8.7 section F for more information.'); 
     },
 function (session) {
         builder.Prompts.text(session, 'Is there anything else I can help you with today?');
     },
     function (session) {
-        builder.Prompts.text(session, 'You are very welcome.');
+        builder.Prompts.text(session, 'You\'re very welcome.');
     },
     function (session, results) {
         session.userData.text = results.response;
@@ -103,10 +100,7 @@ function (session) {
 //     session.beginDialog('/questions');
 // }
 // ]);
-
-
 //DvD5Cv4jMys.cwA.cgk.6-Z0LRE6k0DZi3shEp7h3T5t4J4Rg_sXCP5qMAyIkUo
-
 server.get('/', restify.serveStatic({
  directory: "C:\ctrchatbot",
  default: '/index.html'
