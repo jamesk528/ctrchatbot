@@ -23,6 +23,7 @@ server.post('/api/messages', connector.listen());
 //=========================================================
 var intents = new builder.IntentDialog();
 bot.dialog('/', intents);
+
 intents.onDefault([
     function (session, args, next) {
         if (!session.userData.text) {
@@ -32,6 +33,7 @@ intents.onDefault([
         }
     },
     function (session, results) {
+bot.dialog('/Pcard', [
         session.beginDialog('/BotDialog', session.userData.text);
     }
 ]);
@@ -65,8 +67,10 @@ function (session) {
         session.endDialog();
     }
 ]);
+
 // var intents = new builder.IntentDialog();
 // bot.dialog('/', intents);
+
 // intents.matches(/^Purchasing Card/i, [
 //     function(session) {
 //         builder.Prompts.text(session, "The limit is $1000 per transaction and $5,000 per month. Would you like to request an exemption? ")
@@ -75,6 +79,7 @@ function (session) {
 //         session.send("Ok.. %s", results.response);
 //     }
 // ]);
+
 // intents.matches(/^Travel Card/i, [
 //     function(session) {
 //         builder.Prompts.text(session, "What would you like to know about the travel card?")
@@ -83,6 +88,7 @@ function (session) {
 //         session.send("Ok.. %s", results.response);
 //     }
 // ]);
+
 // bot.dialog('/', [
 //   function (session) {
 //     builder.Prompts.text(session, 'Hi! What is your name?');
